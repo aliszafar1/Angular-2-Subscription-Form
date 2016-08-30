@@ -1,0 +1,101 @@
+<h2>Subscription</h2>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.form)">
+
+	<div class="form-group">
+		<label for="userName">First Name</label>
+		<input
+			type="text"
+			id="usernName"
+			class="form-control"
+			ngControl="userName"
+			#userName="ngForm"
+			minlength="3"
+			required
+		>
+		<div *ngIf="userName.touched && userName.errors">
+			<div *ngIf="userName.errors.required">
+				Please enter Username properly.
+			</div>
+			<div *ngIf="userName.errors.minlength">
+				Username must be atleast 
+				{{ userName.errors.minlength.requiredLength }}
+			</div>
+		</div>	
+	</div>
+
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input
+			type="email"
+			id="email"
+			class="form-control"
+			ngControl="email"
+			#email="ngForm"
+			required
+		>
+		<div *ngIf="email.touched && email.errors">
+			<div *ngIf="email.errors.required">
+				Please provide us email address.
+			</div>
+			<div>
+				{{ email.errors | json }}
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="frequencyofEmail">Frequency of Emails</label>
+		<select class="form-control" id="frequencyofEmail">
+			<option value="weekly">Weekly</option>
+			<option value="monthly">Monthly</option>
+			<option value="yearly">Yearly</option>
+		</select>
+	</div>
+
+	<button class="btn btn-primary" [disabled]="!f.valid">Subscribe</button>
+</form>
+
+
+
+
+
+<!--
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.form)">
+	<div class="form-group">
+		<label for="firstName">First Name</label>
+		<input 
+				ngControl="firstName"
+		 		#firstName="ngForm" 
+		 		(change)="log(firstName)"
+		 		 id="firstName" 
+		 		 type="text"
+		 		 class="form-control"
+		 		  required
+		 		  minlength="3">	
+
+		 <div *ngIf="firstName.touched && firstName.errors">
+			 <div *ngIf="firstName.errors.required">
+			 	First name is required.
+			 </div>	
+			 <div 
+			 	class="alert alert-danger"
+			 	*ngIf="firstName.errors.minlength">
+			 	First name should be minimum 
+			 	{{ firstName.errors.minlength.requiredLength }} characters.
+			 </div>
+		 </div>
+
+	</div>
+	<div class="form-group">
+		<label for="comment">Comment</label>
+		<textarea ngControl="comment" #comment="ngForm" (change)="log(comment)" id="comment" cols="30" rows="10" class="form-control" required></textarea>
+		<div *ngIf="!comment.errors.required && comment.touched">
+			Comment is required.
+		</div>
+	</div>
+	<button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>		
+</form>
+
+-->
